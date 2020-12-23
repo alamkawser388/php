@@ -1,9 +1,5 @@
 package stepDefe;
 
-//public class LoginStepsCode {
-	
-	
-
 import java.util.ArrayList;
 //import java.util.Collections;
 import java.util.List;
@@ -24,11 +20,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import cucumber.api.java.en.When;
+//import cucumber.api.java.en.When;
 //Project imports
 import pageFactory.LoginPagePH;
-//import locators.xpaths;
-
 
 public class LoginStepsCode {
 	WebDriver driver;
@@ -45,7 +39,7 @@ public class LoginStepsCode {
 		
 		driver.manage().window().maximize();
 		
-		loginpageph = PageFactory.initElements(driver, LoginPagePH.class);
+		loginpageph = PageFactory.initElements(driver, LoginPagePH.class);	
 	}
 
 @Then("^user Navigate to Page and verify the Page Title Is \"([^\"]*)\"$")
@@ -53,6 +47,10 @@ public class LoginStepsCode {
 		String actual = driver.getTitle();
 		String expected = "PHPTRAVELS | Travel Technology Partner";
 		Assert.assertTrue("This Tittle is Wrong", actual.contains(expected));
+		
+		System.out.println("My URL is = " + driver.getCurrentUrl());  // FOR GET URL
+		System.out.println("web page title = " + driver.getTitle());  // FOR  GET TITEL
+		
 	}
 
 @Then("^user enter a valid username and Password$")
@@ -83,9 +81,9 @@ public class LoginStepsCode {
 	//wait = new WebDriverWait(driver, 10);
 	//wait.until(ExpectedConditions.visibilityOf(loginpageph.getHomeBtn()));
 	//loginpageph.getHomeBtn().click();
-	
+	Thread.sleep(3000);
 		WebElement home = driver.findElement(By.xpath("//*[@title = 'home']"));
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(home));
 		home.click();	
 	}
@@ -112,7 +110,10 @@ public void check_in_date_next_month_and_check_out_next_month() throws Throwable
 	check.click();
 	//wait = new WebDriverWait(driver, 15);
     //wait.until(ExpectedConditions.visibilityOf(check));
-    
+	//driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	
+	
+	
 	WebElement checkym = driver.findElement(By.xpath("//*[@data-action='next']"));
 	wait = new WebDriverWait(driver, 10);
 	wait.until(ExpectedConditions.elementToBeClickable(checkym));
@@ -171,6 +172,7 @@ public void user_can_Select_the_second_hotel_from_the_list_by_clicking_the_DETAI
 public void user_click_on_see_price_and_date_button_on_the_top_right_and_select_the_first_room_and_remember_the_price() throws Throwable {
 	WebElement seeprice = driver.findElement(By.xpath("//*[@class='anchor btn btn-primary btn-wide mt-5']"));
 	seeprice.click();
+	Thread.sleep(3000);
 	WebElement firstroom = driver.findElement(By.xpath("(//*[@class='custom-control-label text-left go-left'])[1]"));
 	firstroom.click();
     
@@ -181,7 +183,7 @@ public void user_Then_click_BOOK_NOW_button_for_checkout() throws Throwable {
     
     // Scroll Down using
 	JavascriptExecutor js = ((JavascriptExecutor) driver);
-	js.executeScript("window.scrollBy(0,800)");
+	js.executeScript("window.scrollBy(0,900)");
 	WebElement book = driver.findElement(By.xpath("(//*[@type='submit'])[2]"));
 	book.click();
 }
@@ -190,10 +192,13 @@ public void user_Then_click_BOOK_NOW_button_for_checkout() throws Throwable {
 public void user_On_the_next_page_verify_Total_Amount_is_greater_than_Room_Price() throws Throwable {
  
 	
-	String actualstotalamount = "$15500"; 
-	String expectedtotalamount = driver.findElement(By.xpath("//*[@class='text-main absolute-right']")).getText();
-	System.out.println("This expected price is: "+expectedtotalamount);
+	//String actualstotalamount = "$15500"; 
+	//String expectedtotalamount = driver.findElement(By.xpath("//*[@class='text-main absolute-right']")).getText();
+	//System.out.println("This expected price is: "+expectedtotalamount);
 	//Assert.assertTrue ( actualstotalamount.equals(expectedtotalamount));
+	
+	//WebElement total = driver.findElement(By.xpath("//*[@class='text-main absolute-right']"));
+	System.out.println("This is the totel price =" + driver.findElement(By.xpath("//*[@class='text-main absolute-right']")).getText());
 		   
 }
 

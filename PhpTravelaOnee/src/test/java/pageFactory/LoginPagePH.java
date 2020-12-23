@@ -1,6 +1,4 @@
 package pageFactory;
-
-//public class LoginPagePH {
 	
 
 	import org.openqa.selenium.WebDriver;
@@ -13,7 +11,7 @@ package pageFactory;
 
 		WebDriver driver;
 
-		public LoginPagePH(WebDriver driver) { // c consector
+		public LoginPagePH(WebDriver driver) { // constructor
 			this.driver = driver;
 			PageFactory.initElements(driver, this);
 		}
